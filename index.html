@@ -43,9 +43,15 @@
     y:chartCanvas.height/2
   };
 
+  let theta=Math.PI/4;
+  const c=100;
+
   //Set point values
   const A={x:0, y:0};
-  const B={x:90, y:120};
+  const B={
+    x:Math.cos(theta)*c,
+    y:Math.sin(theta*c)
+  };
   const C={x:B.x, y:0};
 
   // Translates the offset
@@ -68,16 +74,11 @@
   }
   // Refresh everytime we move our mouse
   function update() {
-    //Find the distance between two points
-    const c = distance(A, B);
-    const a = distance(B, C);
-    const b = distance(A, C);
 
     // Adding the sin function
-    const sin=a/c;
-    const cos=b/c;
-    const tan=sin/cos; // essentially a/b
-    const theta=Math.asin(sin);
+    const sin=Math.sin(theta);
+    const cos=Math.cos(theta);
+    const tan=Math.tan(theta); // essentially a/b
 
     ctx.clearRect(-offset.x, -offset.y, myCanvas.width, myCanvas.height);
 
