@@ -63,11 +63,11 @@
 
     // Draw lines between the points to create a triangle and create text labels
     drawLine(A, B);
-    drawText("c:" + Math.round(c), average(A, B));
+    drawText("c", average(A, B));
     drawLine(A, C);
-    drawText("b:" + Math.round(b), average(A, C));
+    drawText("b", average(A, C));
     drawLine(B, C);
-    drawText("a:" + Math.round(a), average(B, C));
+    drawText("a", average(B, C));
   }
 
   // Functions for average and distance to add to text labels
@@ -87,7 +87,10 @@
     ctx.fillStyle=color;
     ctx.textAlign="center";
     ctx.textBaseline="middle";
-    ctx.font="bold 13px Courier";
+    ctx.font="bold 18px Courier";
+    ctx.strokeStyle="white";
+    ctx.lineWidth=7;
+    ctx.strokeText(text,loc.x,loc.y);
     ctx.fillText(text,loc.x,loc.y);
   }
 
