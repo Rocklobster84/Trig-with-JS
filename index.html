@@ -64,9 +64,11 @@
   update();
 
   // Add event listener for mouse move
-  document.onmousemove=(event)=>{
-    B.x=event.x-offset.x;
-    B.y=event.y-offset.y;
+  document.onwheel=(event)=>{
+    theta-=Math.sign(event.deltaY);
+
+    B.x=Math.cos(theta)*c;
+    B.y=Math.sin(theta)*c;
 
     C.x=B.x;
 
@@ -75,7 +77,6 @@
   // Refresh everytime we move our mouse
   function update() {
 
-    // Adding the sin function
     const sin=Math.sin(theta);
     const cos=Math.cos(theta);
     const tan=Math.tan(theta); // essentially a/b
@@ -127,13 +128,7 @@
     ctx.beginPath();
     ctx.strokeStyle="black";
     ctx.lineWidth=2;
-    const start=B.x>A.x?0:Math.PI;
-    const clockwise=B.y<C.y^B.x>A.x;
-    let end=B.y<C.y?-theta:theta;
-    if(B.x<A.x){
-      end=Math.PI-end;
-    }
-    ctx.arc(0,0,20,start,end,!clockwise);
+    ctx.arc(0,0,c,0,theta);
     ctx.stroke();
 
     // Draws point on chart and scales it so it can actually be seen since it is a very low set of numbers
