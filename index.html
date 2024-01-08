@@ -82,7 +82,7 @@
     const tan=Math.tan(theta); // essentially a/b
 
     const T={
-      x:Math.hypot(1,tan)*c,
+      x:Math.sign(cos)*Math.hypot(1,tan)*c,
       y:0
     }
 
