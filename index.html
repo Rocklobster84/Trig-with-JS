@@ -35,16 +35,30 @@
   const B={x:90, y:120};
   const C={x:B.x, y:0};
 
-  // Draw the x,y coordinate system
-  drawCoordinateSystem(ctx, offset);
+  // Add event listener for mouse move
+  document.onmousemove=(event)=>{
+    B.x=event.x-offset.x;
+    B.y=event.y-offset.y;
 
-  //Draw these 3 points along with their labels
-  drawPoint(A);
-  drawText("A",A);
-  drawPoint(B);
-  drawText("B",B);
-  drawPoint(C);
-  drawText("C",C);
+    C.x=B.x;
+
+    update();
+  }
+  // Refresh everytime we move our mouse
+  function update() {
+    ctx.clearRect(-offset.x, -offset.y, myCanvas.width, myCanvas.height);
+
+    // Draw the x,y coordinate system
+    drawCoordinateSystem(ctx, offset);
+
+    //Draw these 3 points along with their labels
+    drawPoint(A);
+    drawText("A", A);
+    drawPoint(B);
+    drawText("B", B);
+    drawPoint(C);
+    drawText("C", C);
+  }
 
   // Add Text to Points so it is clearer where they are
   function drawText(text,loc,color="white") {
