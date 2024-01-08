@@ -28,12 +28,17 @@
     x:myCanvas.width/2,
     y:myCanvas.height/2
   };
-  ctx.translate(offset.x, offset.y);
 
   //Set point values
   const A={x:0, y:0};
   const B={x:90, y:120};
   const C={x:B.x, y:0};
+
+  // Translates the offset
+  ctx.translate(offset.x, offset.y);
+
+  // Call update function so that screen is not blank initially
+  update();
 
   // Add event listener for mouse move
   document.onmousemove=(event)=>{
@@ -46,10 +51,23 @@
   }
   // Refresh everytime we move our mouse
   function update() {
+    //Find the distance between two points
+    const c=distance(A,B);
+    const a=distance(B,C);
+    const b=distance(A,C);
+
     ctx.clearRect(-offset.x, -offset.y, myCanvas.width, myCanvas.height);
 
     // Draw the x,y coordinate system
     drawCoordinateSystem(ctx, offset);
+
+    // Draw lines between the points to create a triangle and create text labels
+    drawLine(A,B);
+    drawText("c:"+Math.round(c), average(A,B), "black");
+    drawLine(A,C);
+    drawText("b:"+Math.round(b), average(A,C), "black");
+    drawLine(B,C);
+    drawText("a:"+Math.round(a), average(B,C), "black");
 
     //Draw these 3 points along with their labels
     drawPoint(A);
@@ -59,7 +77,17 @@
     drawPoint(C);
     drawText("C", C);
   }
-
+  // Functions for average and distance to add to text labels
+  function average(p1,p2){
+    return{
+      x:(p1.x+p2.x)/2,
+      y:(p1.y+p2.y)/2
+    };
+  }
+ // Length of the hypotenuse
+  function distance(p1,p2) {
+    return Math.hypot(p1.x-p2.x,p1.y-p2.y);
+  }
   // Add Text to Points so it is clearer where they are
   function drawText(text,loc,color="white") {
     ctx.beginPath();
@@ -76,6 +104,16 @@
     ctx.fillStyle = color;
     ctx.arc(loc.x, loc.y, size/2, 0, Math.PI * 2);
     ctx.fill();
+  }
+
+  // Function to draw lines from point to point
+  function drawLine(p1, p2, color="black") {
+    ctx.beginPath();
+    ctx.strokeStyle=color;
+    ctx.lineWidth=2;
+    ctx.moveTo(p1.x,p1.y);
+    ctx.lineTo(p2.x,p2.y);
+    ctx.stroke();
   }
 
   // Function to draw x,y coordinate system
