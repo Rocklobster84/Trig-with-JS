@@ -30,8 +30,21 @@
 
   //Draw these 3 points
   drawPoint(A);
+  drawText("A",A);
   drawPoint(B);
+  drawText("B",B);
   drawPoint(C);
+  drawText("C",C);
+
+  // Add Text to Points so it is clearer where they are
+  function drawText(text,loc,color="white") {
+    ctx.beginPath();
+    ctx.fillStyle=color;
+    ctx.textAlign="center";
+    ctx.textBaseline="middle";
+    ctx.font="bold 13px Courier";
+    ctx.fillText(text,loc.x,loc.y);
+  }
 
   // Function to create individual points
   function drawPoint(loc,size=20,color="black") {
