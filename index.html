@@ -52,9 +52,9 @@
   // Refresh everytime we move our mouse
   function update() {
     //Find the distance between two points
-    const c=distance(A,B);
-    const a=distance(B,C);
-    const b=distance(A,C);
+    const c = distance(A, B);
+    const a = distance(B, C);
+    const b = distance(A, C);
 
     ctx.clearRect(-offset.x, -offset.y, myCanvas.width, myCanvas.height);
 
@@ -62,21 +62,14 @@
     drawCoordinateSystem(ctx, offset);
 
     // Draw lines between the points to create a triangle and create text labels
-    drawLine(A,B);
-    drawText("c:"+Math.round(c), average(A,B), "black");
-    drawLine(A,C);
-    drawText("b:"+Math.round(b), average(A,C), "black");
-    drawLine(B,C);
-    drawText("a:"+Math.round(a), average(B,C), "black");
-
-    //Draw these 3 points along with their labels
-    drawPoint(A);
-    drawText("A", A);
-    drawPoint(B);
-    drawText("B", B);
-    drawPoint(C);
-    drawText("C", C);
+    drawLine(A, B);
+    drawText("c:" + Math.round(c), average(A, B));
+    drawLine(A, C);
+    drawText("b:" + Math.round(b), average(A, C));
+    drawLine(B, C);
+    drawText("a:" + Math.round(a), average(B, C));
   }
+
   // Functions for average and distance to add to text labels
   function average(p1,p2){
     return{
@@ -89,7 +82,7 @@
     return Math.hypot(p1.x-p2.x,p1.y-p2.y);
   }
   // Add Text to Points so it is clearer where they are
-  function drawText(text,loc,color="white") {
+  function drawText(text,loc,color="black") {
     ctx.beginPath();
     ctx.fillStyle=color;
     ctx.textAlign="center";
