@@ -65,7 +65,7 @@
 
   // Add event listener for mouse move
   document.onwheel=(event)=>{
-    theta-=Math.sign(event.deltaY);
+    theta-=toRad(Math.sign(event.deltaY));
 
     B.x=Math.cos(theta)*c;
     B.y=Math.sin(theta)*c;
@@ -147,6 +147,11 @@
       x:theta*chartScaler,
       y:tan*chartScaler
     },2,"magenta");
+  }
+
+  // Function to calculate to radians
+  function toRad(deg){
+    return deg*Math.PI/180;
   }
 
   // Function to calculate degrees
