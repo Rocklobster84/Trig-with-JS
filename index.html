@@ -7,7 +7,7 @@
 <body>
 
 <canvas id="myCanvas"
-        width="500px" height="100px"
+        width="500px" height="500px"
         style="background-color: white">
 </canvas>
 
@@ -15,7 +15,7 @@
 <br>
 
 <canvas id="chartCanvas"
-        width="500px" height="500px"
+        width="500px" height="100px"
         style="background-color: white">
 </canvas>
 
@@ -134,7 +134,25 @@
     }
     ctx.arc(0,0,20,start,end,!clockwise);
     ctx.stroke();
+
+    // Draws point on chart and scales it so it can actually be seen since it is a very low set of numbers
+    const chartScaler=chartOffset.y*0.5;
+    drawPoint({
+      x:theta*chartScaler,
+      y:sin*chartScaler
+    },2,"red");
+
+    drawPoint({
+      x:theta*chartScaler,
+      y:cos*chartScaler
+    },2,"blue");
+
+    drawPoint({
+      x:theta*chartScaler,
+      y:tan*chartScaler
+    },2,"magenta");
   }
+
   // Function to calculate degrees
   function toDeg(rad){
     return rad*180/Math.PI;
@@ -166,10 +184,10 @@
 
   // Function to create individual points
   function drawPoint(loc,size=20,color="black") {
-    ctx.beginPath();
-    ctx.fillStyle = color;
-    ctx.arc(loc.x, loc.y, size/2, 0, Math.PI * 2);
-    ctx.fill();
+    chartCtx.beginPath();
+    chartCtx.fillStyle = color;
+    chartCtx.arc(loc.x, loc.y, size/2, 0, Math.PI * 2);
+    chartCtx.fill();
   }
 
   // Function to draw lines from point to point
